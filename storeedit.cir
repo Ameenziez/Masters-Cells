@@ -1,0 +1,73 @@
+.subckt BISTORE INCR0 DECR0 NODEL NODER
+.param Btotal = 9.90282094e-01
+.param Ltotal = 9.90640356e-01
+.param Itotal = 8.26751214e-01
+.param LIN= 6.26984882e-13
+.param LJTL1= 3.60505462461e-12
+.param LJTL2 = LJTL1
+.param IJTL=1.147059591881396e-04
+.param AREAjtl= 1.780328086e+00
+.param AREAstore= 8.791152370520e-01
+.param Rshuntstore = 1.32720341e+00
+.param RshuntJTL = 4.28433436e+01
+.param LINleft= LIN*LTOTAL
+.param LINright= LIN*LTOTAL
+.param LJTLleft1 = LJTL1*LTOTAL
+.param LJTLleft2 = LJTL2*LTOTAL
+.param LJTLright1 = LJTL1*LTOTAL
+.param LJTLright2 = LJTL2*LTOTAL
+.param IJTLleft = IJTL*ITOTAL
+.param IJTLright = IJTL*ITOTAL
+.param Rshuntstoreleft=Rshuntstore
+.param Rshuntstoreright=Rshuntstore
+.param RshuntJTLleft = RshuntJTL
+.param RshuntJTLright = RshuntJTL
+.param BSTOREleft = AREAstore*BTOTAL
+.param BSTOREright = AREAstore*BTOTAL
+.param BJTLleft = AREAjtl*BTOTAL
+.param BJTLright = AREAjtl*BTOTAL
+.param LCURRENTleft = 1p
+.param LCURRENTright = 1p
+.param ISTORE= 5u
+
+
+
+
+LINleft INCR0 INCR LINleft
+LINright DECR0 DECR LINright
+
+
+BJTLleft incr bplus0 NJTL1 jjmit area=BJTLleft
+RshuntJTLleft INCR 0 RshuntJTLleft
+lpbplus bplus0 0 0.2p
+
+BJTLright decr bminus0 NJTL2 jjmit area=BJTLright
+RshuntJTLright DECR 0 RshuntJTLright
+lpbminus bminus0 0 0.2p
+
+#VSOURCELEFT sourceleft 0 pwl(0 0 20p VSOURCE)
+#RSOURCELEFT sourceleft testp0 RSOURCE
+IJTLleft 0 testp0 pwl(0 0 20p IJTLleft)
+LCURRENTleft testp0 testp LCURRENTleft
+LJTLleft1 INCR testp LJTLleft1
+LJTLleft2 testp NODEL LJTLleft2
+
+
+
+BSTOREleft NODEL PL N1 jjmit area=BSTOREleft
+LPL PL 0 0.2p
+Rshuntstoreleft NODEL 0 Rshuntstoreleft
+BSTOREright NODER PR N2 jjmit area=BSTOREright
+LPR PR 0 0.2p
+Rshuntstoreright NODER 0 Rshuntstoreright
+
+IJTLright 0 testd0 pwl(0 0 20p IJTLright)
+LCURRENTright testd0 testd LCURRENTright
+LJTLright1 DECR testd LJTLright1
+LJTLright2 testd NODER LJTLright2
+
+#ISTORE 0 NODEM pwl(0 0 20p ISTORE)
+#ADDED THIS SOURCE TO THE SYNAPSE CCT
+.ends BISTORE
+
+

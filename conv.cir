@@ -1,0 +1,110 @@
+
+
+#changed junction area of b4
+
+.subckt AQFP2RSFQ2 XIN XOUT AQFPIN RSFQOUT DCIN DCOUT
+#EXCITATION CURRENT AND DC OFFSET INDUCTORS
+LX XIN XOUT 15p
+#WAS 6P CHANGED TO 15P
+#was 1.51p
+LD DCIN DCOUT 6.51p
+#MUTUAL INDUCATANCES
+K1 LX LD 0.2322
+K2 LX L1 -0.2284
+K3 LD L1 -0.1559
+K5 L2 LD 0.1559
+K6 L2 LX 0.228
+#FEED IN DATA 
+#was 32.3p
+LQ N0 AQFPIN 2.3p
+L1 N1 N0  1.47p
+L2 N2 N0  1.47p
+B1 N1 P1 13 jjmit area=2
+LP1 P1 0 0.2p
+#was 1.6314
+RSHUNT1 N1 0 0.6134
+B2 N2 P2 14 jjmit area=2
+LP2 P2 0 0.2p
+RSHUNT2 N2 0 1.2
+#using shunt of 1.2 works well
+#RSHUNT2 N2 0 16.42
+#commented shunt out bc it recommended it in paper
+#WAS 0.6
+Rif N2 JTL1 0.8
+#Rif2 N2 JTL1 0.5
+IB 0 JTL2 PWL(0 0 20ps 150u)
+#was 160u
+#WAS 123u had to increase to 150u
+L3A JTL1 JTL2 2.7p
+#was 2.7
+#WAS 2.4
+L4A JTL2 JTL3 0.185p
+#was 0.185
+L5A JTL3 RSFQOUT 4.7p
+#was 4.6
+#was 5.33p
+B3 JTL2 P3 15 jjmit area=1.39
+LP3 P3 0 0.2p
+RSHUNT3 JTL2 0 26.4
+#was 26.4
+B4 RSFQOUT P4 16 jjmit area=2
+LP4 P4 0 0.2p
+RSHUNT4 RSFQOUT 0 5.1
+#was 5.1
+#was 1.12 according to calcs but higher resistance gets higher Vout...
+.ends AQFP2RSFQ2
+
+
+#changed junction area of b4
+
+.subckt AQFP2RSFQ3 XIN XOUT AQFPIN RSFQOUT DCIN DCOUT
+#EXCITATION CURRENT AND DC OFFSET INDUCTORS
+LX XIN XOUT 15p
+#WAS 6P CHANGED TO 15P
+#was 1.51p
+LD DCIN DCOUT 6.51p
+#MUTUAL INDUCATANCES
+K1 LX LD 0.2322
+K2 LX L1 -0.2284
+K3 LD L1 -0.1559
+K5 L2 LD 0.1559
+K6 L2 LX 0.228
+#FEED IN DATA 
+#was 32.3p
+LQ N0 AQFPIN 2.3p
+L1 N1 N0  1.47p
+L2 N2 N0  1.47p
+B1 N1 P1 13 jjmit area=2
+LP1 P1 0 0.2p
+#was 1.6314
+RSHUNT1 N1 0 0.6134
+B2 N2 P2 14 jjmit area=2
+LP2 P2 0 0.2p
+RSHUNT2 N2 0 1.2
+#using shunt of 1.2 works well
+#RSHUNT2 N2 0 16.42
+#commented shunt out bc it recommended it in paper
+#WAS 0.6
+Rif N2 JTL1 0.9
+#Rif2 N2 JTL1 0.5
+IB 0 JTL2 PWL(0 0 20ps 150u)
+#was 160u
+#WAS 123u had to increase to 150u
+L3A JTL1 JTL2 2.7p
+#was 2.7
+#WAS 2.4
+L4A JTL2 JTL3 0.185p
+#was 0.185
+L5A JTL3 RSFQOUT 4.7p
+#was 4.6
+#was 5.33p
+B3 JTL2 P3 15 jjmit area=1.39
+LP3 P3 0 0.2p
+RSHUNT3 JTL2 0 26.4
+#was 26.4
+B4 RSFQOUT P4 16 jjmit area=2
+LP4 P4 0 0.2p
+RSHUNT4 RSFQOUT 0 5.1
+#was 5.1
+#was 1.12 according to calcs but higher resistance gets higher Vout...
+.ends AQFP2RSFQ3

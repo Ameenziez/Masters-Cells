@@ -1,0 +1,46 @@
+.include LSmitll_DCSFQ_PTLTX_v1p5.cir
+.include LSmitll_PTLRX_SFQDC_v1p5.cir
+.include LSmitll_SPLITT_v1p5.cir
+.INCLUDE LSMITLL_JTLT_V1P5.CIR
+.INCLUDE LSMITLL_MERGET_V1P5.CIR
+.include storeedit.cir
+.INCLUDE COMPONENTSEDIT.CIR
+.INCLUDE COMP4.CIR
+.INCLUDE CONV.CIR
+.INCLUDE COMP5.CIR
+.include multisplit.CIR
+.INCLUDE DCPULSER.CIR
+.include transmit.cir
+
+.INCLUDE OR3.CIR
+.tran 0.1ps 2200PS 0ps 1p
+
+
+
+
+
+
+VDC    DC1   0   PWL(0ps 0mV 20ps 1024mV)
+
+
+
+VDCconv    DCc1   0   PWL(0ps 0mV 20ps 1023mV 1.881e-08 1023mV 1.8811000000000002e-08 0)
+RDCconv    DCc1   DCc2  740
+LDCconv    DCc2   DCc3   0.1p
+
+VAC1   A11   0   SIN(0 723mV 5GHz 105ps 0)
+RAC1   A11   A12   1000
+RDC    DC1   DC2   1000
+
+LAC1   A12   A13   0.1p
+LDC    DC2   DC3   0.1p
+
+VAC2   B11   0   SIN(0 723mV 5GHz 55ps 0)
+RAC2   B11   B12   1000
+LAC2   B12   B13   0.1p
+
+ipulse 0 INPUT pwl( 0 0 20p 0 )
+
+X1 transmit INPUT A13 0 B13 0 DC3 0 DCC3 0 OUTPUT
+
+ .print nodev output
